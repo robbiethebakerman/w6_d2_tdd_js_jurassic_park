@@ -98,7 +98,16 @@ describe('Park', function() {
     park.addDinosaur(dinosaur4);
     park.removeDinosaursBySpecies('Archaeopteryx');
     const actual = park.dinosaurs;
-    assert.deepStrictEqual(actual, [dinosaur1, dinosaur2]);    
+    assert.deepStrictEqual(actual, [dinosaur1, dinosaur2]);
+  });
+
+  it('should be able to provide an object containing each of the diet types and the number of dinosaurs in the park of that diet type', function(){
+    park.addDinosaur(dinosaur1);
+    park.addDinosaur(dinosaur2);
+    park.addDinosaur(dinosaur3);
+    park.addDinosaur(dinosaur4);
+    const actual = park.showDietTypeNumbers();
+    assert.deepStrictEqual(actual, { 'carnivores': 1, 'herbivores': 1, 'omnivores': 2 });
   });
 
 });
