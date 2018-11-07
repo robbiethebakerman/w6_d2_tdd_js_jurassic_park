@@ -25,8 +25,22 @@ Park.prototype.findMostPopularDinosaur = function () {
   return mostPopularDinosaur;
 };
 
+// Alternative loop
+
+Park.prototype.findHottestDino = function () {
+  let hottestDino = this.dinosaurs[0];
+  for (dino of this.dinosaurs) {
+    if(dino.guestsAttractedPerDay > hottestDino.guestsAttractedPerDay) {
+      hottestDino = dino;
+    }
+  }
+  return hottestDino;
+};
+
+// Could also use sort to sort the dinosaurs array - then pull out the first one
+
 Park.prototype.findDinosaursBySpecies = function (species) {
-  let dinosaursBySpecies = []
+  const dinosaursBySpecies = []
   for (dinosaur of this.dinosaurs) {
     if (dinosaur.species === species) {
       dinosaursBySpecies.push(dinosaur);
@@ -34,6 +48,7 @@ Park.prototype.findDinosaursBySpecies = function (species) {
   }
   return dinosaursBySpecies;
 };
+
 
 Park.prototype.visitorsPerDay = function () {
   let visitors = 0
@@ -60,6 +75,18 @@ Park.prototype.removeDinosaursBySpecies = function (species) {
   }
 };
 
+// Alternative
+
+Park.prototype.removeDinosBySpecies = function (species) {
+  const dinosaursToKeep = [];
+  for (const dino of this.dinosaurs) {
+    if (dino.species !== species) {
+      dinosaursToKeep.push(dino);
+    }
+  }
+  this.dinosaurs = dinosaursToKeep;
+};
+
 Park.prototype.showDietTypeNumbers = function () {
   let carnivores = 0;
   let herbivores = 0;
@@ -75,6 +102,20 @@ Park.prototype.showDietTypeNumbers = function () {
   }
   const dietTypeNumbers = { 'carnivores': carnivores, 'herbivores': herbivores, 'omnivores': omnivores };
   return dietTypeNumbers;
+};
+
+// Alternative
+
+Park.prototype.numberOfDinosaursByDiet = function () {
+  const numberOfDinosaursByDiet = {};
+  for (const dinosaur of this.dinosaurs) {
+    if (numberOfDinosaursByDiet[dinosaur.diet]) {
+      numberOfDinosaursByDiet[dinosaur.diet] += 1;
+    } else {
+      numberOfDinosaursByDiet[dinosaur.diet] = 1;
+    }
+  }
+  return numberOfDinosaursByDiet;
 };
 
 module.exports = Park
